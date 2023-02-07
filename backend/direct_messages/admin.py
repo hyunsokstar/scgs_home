@@ -1,7 +1,21 @@
 from django.contrib import admin
 from .models import ChattingRoom, Message
+# from django_summernote.admin import SummernoteModelAmdin
+from django_summernote.admin import SummernoteModelAdmin
 
-# Register your models here.
+@admin.register(Message)
+class MessageAdmin(SummernoteModelAdmin):
+    summernote_fields = ('text',)
+
+    list_display = (
+        "text",
+        "user",
+        "room",
+        "created_at",
+    )
+    list_filter = (
+        "created_at",
+    )
 
 
 @admin.register(ChattingRoom)
@@ -13,16 +27,16 @@ class ChattingRoomAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-    list_display = (
-        "text",
-        "user",
-        "room",
-        "created_at",
-    )
-    list_filter = (
-        "created_at",
-    )
+# @admin.register(Message)
+# class MessageAdmin(admin.ModelAdmin):
+#     list_display = (
+#         "text",
+#         "user",
+#         "room",
+#         "created_at",
+#     )
+#     list_filter = (
+#         "created_at",
+#     )
 
 

@@ -123,6 +123,8 @@ function BuildingManagement({ }: Props): ReactElement {
                         <TabPanel display='flex' mt='2' alignItems='center'>
                             {/* <Box display='flex' mt='2' alignItems='center'> */}
 
+
+
                             <Grid templateColumns={"1fr 2fr"} gap={6}>
                                 <GridItem w='100%' bg='gray.200'>
                                     <Image boxSize='400px' src='https://www.scgs.co.kr/images/snn/images/sub/service01.jpg' alt='Dan Abramov' />

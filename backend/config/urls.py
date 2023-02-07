@@ -11,5 +11,6 @@ urlpatterns = [
     path("api/v1/experiences/", include("experiences.urls")),
     path("api/v1/medias/", include("medias.urls")),
     path("api/v1/users/", include("users.urls")),
-    path("api/v1/wishlists/", include("wishlists.urls")),    
+    path("api/v1/wishlists/", include("wishlists.urls")),
+    path('summernote/', include('django_summernote.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

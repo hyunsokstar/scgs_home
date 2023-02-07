@@ -15,6 +15,7 @@ interface IRoomProps {
 
 export default function Room({ pk, imageUrl, name, rating, city, country, price }: IRoomProps) {
     const gray = useColorModeValue("gray.600", "gray.300");
+    
     return (
         <Link to={`/rooms/${pk}`}>
             <VStack alignItems={"flex-start"}>

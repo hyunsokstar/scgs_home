@@ -73,8 +73,8 @@ SYSTEM_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
     'django_summernote',
-    # "corsheaders" 
 ]
 
 INSTALLED_APPS = CUSTOM_APPS + THIRD_PARTY_APPS + SYSTEM_APPS

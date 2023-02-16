@@ -80,7 +80,7 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = CUSTOM_APPS + THIRD_PARTY_APPS + SYSTEM_APPS
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",    
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -121,16 +121,30 @@ WSGI_APPLICATION = "config.wsgi.application"
 #     }
 # }
 
-DATABASES = { 
-	'default': { 
-    	'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'scgs_db', 
-        'USER': 'root', 
-        'PASSWORD': '20200902', 
-        'HOST': 'localhost', 
-        'PORT': '3306', 
-     } 
+DATABASES = {
+	'default': {
+    	'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'scgs_db',
+        'USER': 'root',
+        'PASSWORD': '20200902',
+        'HOST': 'localhost',
+        'PORT': '3306',
+     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'scgsdb',
+#         'USER': 'admin',
+#         'PASSWORD': '20200902',
+#         'HOST': 'scgs-home.czwvp7eihfxf.ap-northeast-2.rds.amazonaws.com',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -183,9 +197,9 @@ PAGE_SIZE = 3
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-        "config.authentication.TrustMeBroAuthentication",        
-        "rest_framework.authentication.TokenAuthentication", 
-        "config.authentication.JWTAuthentication",          
+        "config.authentication.TrustMeBroAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "config.authentication.JWTAuthentication",
     ]
 }
 

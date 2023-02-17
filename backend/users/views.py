@@ -20,7 +20,7 @@ class Me(APIView):
         user = request.user
         serializer = serializers.PrivateUserSerializer(user)
         return Response(serializer.data)
-    
+
     def put(self, request):
         user = request.user
         serializer = serializers.PrivateUserSerializer(
@@ -34,28 +34,30 @@ class Me(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
-        
-        
+
+
 class Users(APIView):
     def post(self, request):
-        
+
         password = request.data.get("password")
         if not password:
-            raise ParseError        
-        
+            raise ParseError
+
         serializer = serializers.PrivateUserSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             user = serializer.save()
             user.set_password(password)
             user.save()
-                        
+
             serializer = serializers.PrivateUserSerializer(user)
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
 
 # /users/@{username}
+
+
 class PublicUser(APIView):
     def get(self, request, username):
         try:
@@ -64,8 +66,8 @@ class PublicUser(APIView):
             raise NotFound
         serializer = serializers.PrivateUserSerializer(user)
         return Response(serializer.data)
-    
-    
+
+
 # /users/change-password
 class ChangePassword(APIView):
     permission_classes = [IsAuthenticated]
@@ -81,13 +83,19 @@ class ChangePassword(APIView):
             user.save()
             return Response(status=status.HTTP_200_OK)
         else:
-            raise ParseError    
-        
+            raise ParseError
+
+
 class LogIn(APIView):
     print("로그인 시도 확인")
+
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
+
+        print("username : ", username)
+        print("password : ", password)
+
         if not username or not password:
             raise ParseError("username 이나 password 가 없습니다")
         user = authenticate(
@@ -109,8 +117,9 @@ class LogOut(APIView):
 
     def post(self, request):
         logout(request)
-        return Response({"ok": "bye!"}) 
-    
+        return Response({"ok": "bye!"})
+
+
 class JWTLogIn(APIView):
     def post(self, request):
         username = request.data.get("username")

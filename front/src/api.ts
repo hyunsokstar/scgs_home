@@ -4,34 +4,38 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 const instance = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/v1/",
-    withCredentials: true,
+  baseURL: "http://127.0.0.1:8000/api/v1/",
+  withCredentials: true,
 });
 
-export const getRooms = () => instance.get("rooms/").then((response) => response.data);
+export const getRooms = () =>
+  instance.get("rooms/").then((response) => response.data);
 
 export const getRoom = ({ queryKey }: QueryFunctionContext) => {
-    const [_, roomPk] = queryKey;
-    console.log("roomPk : ", roomPk);
-    return instance.get(`rooms/${roomPk}`).then((response) => response.data);
+  const [_, roomPk] = queryKey;
+  console.log("roomPk : ", roomPk);
+  return instance.get(`rooms/${roomPk}`).then((response) => response.data);
 };
 
 export const getRoomReviews = ({ queryKey }: QueryFunctionContext) => {
-    const [_, roomPk] = queryKey;
-    return instance.get(`rooms/${roomPk}/reviews`).then((response) => response.data);
+  const [_, roomPk] = queryKey;
+  return instance
+    .get(`rooms/${roomPk}/reviews`)
+    .then((response) => response.data);
 };
 
-export const getMe = () => instance.get(`users/me`).then((response) => response.data);
+export const getMe = () =>
+  instance.get(`users/me`).then((response) => response.data);
 
 // export const logOut = () => instance.post(`users/log-out`).then((response) => response.data);
 export const logOut = () =>
-    instance
-        .post(`users/log-out`, null, {
-            headers: {
-                "X-CSRFToken": Cookie.get("csrftoken") || "",
-            },
-        })
-        .then((response) => response.data);
+  instance
+    .post(`users/log-out`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
 
 //
 // export interface IUsernameLoginSuccess {
@@ -43,19 +47,25 @@ export const logOut = () =>
 
 //
 export interface IUsernameLoginVariables {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
-export const usernameLogIn = ({ username, password }: IUsernameLoginVariables) =>
-    instance
-        .post(
-            `/users/log-in`,
-            { username, password },
-            {
-                headers: {
-                    "X-CSRFToken": Cookie.get("csrftoken") || "",
-                },
-            }
-        )
-        .then((response) => response.data);
+export const usernameLogIn = ({
+  username,
+  password,
+}: IUsernameLoginVariables) =>
+  instance
+    .post(
+      `/users/log-in`,
+      { username, password },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data)
+    // .catch((error) => {
+    //   console.log("error : ", error.response.data.detail);
+    // });

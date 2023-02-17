@@ -84,11 +84,12 @@ class ChangePassword(APIView):
             raise ParseError    
         
 class LogIn(APIView):
+    print("로그인 시도 확인")
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
         if not username or not password:
-            raise ParseError
+            raise ParseError("username 이나 password 가 없습니다")
         user = authenticate(
             request,
             username=username,
@@ -98,7 +99,8 @@ class LogIn(APIView):
             login(request, user)
             return Response({"ok": "Welcome!"})
         else:
-            return Response({"error": "wrong password"})
+            raise ParseError("로그인 정보가 틀렸습니다.")
+            # return Response({"error": "wrong password"})
 
 
 class LogOut(APIView):
